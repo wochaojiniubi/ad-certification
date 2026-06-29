@@ -4,106 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
 <title>巨量引擎 · 信息流广告营销师认证</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #070a10;
-  --surface: #111927;
-  --surface2: #182233;
-  --border: #1e2a3c;
-  --text: #e2e6ec;
-  --text2: #8490a2;
-  --text3: #5c6678;
-  --accent: #c49b40;
-  --accent2: #d4af5a;
-  --accent-bg: rgba(196,155,64,0.08);
-  --accent-border: rgba(196,155,64,0.25);
-  --error: #e05555;
-  --success: #41a878;
-  --radius: 8px;
+  --bg: #0C0A09;
+  --surface: #1C1917;
+  --surface2: #292524;
+  --border: #44403C;
+  --border-light: #3D3835;
+  --text: #FAFAF9;
+  --text2: #A8A29E;
+  --text3: #78716C;
+  --accent: #A16207;
+  --accent-hover: #CA8A04;
+  --accent-bg: rgba(161,98,7,0.12);
+  --accent-border: rgba(161,98,7,0.3);
+  --error: #F87171;
+  --success: #4ADE80;
+  --green-bg: rgba(74,222,128,0.1);
+  --radius: 6px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
-body{font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;padding:20px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;font-weight:400;background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;padding:20px;line-height:1.6;letter-spacing:0.01em;-webkit-tap-highlight-color:transparent}
 body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse 60% 50% at 30% 20%,rgba(196,155,64,0.03) 0%,transparent 60%),
-  radial-gradient(ellipse 40% 60% at 70% 80%,rgba(196,155,64,0.02) 0%,transparent 60%);
+  radial-gradient(ellipse 50% 40% at 25% 30%,rgba(161,98,7,0.04) 0%,transparent 55%),
+  radial-gradient(ellipse 40% 50% at 75% 70%,rgba(161,98,7,0.03) 0%,transparent 55%);
   pointer-events:none;z-index:0}
 
 .page{width:100%;max-width:420px;position:relative;z-index:1}
 
 /* Brand */
-.brand{margin-bottom:32px;text-align:center}
-.brand .mark{display:inline-block;width:44px;height:44px;border:1.5px solid var(--accent-border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--accent);margin-bottom:14px;letter-spacing:1px;background:var(--accent-bg)}
-.brand h1{font-size:19px;font-weight:600;color:var(--text);letter-spacing:0.5px}
-.brand p{font-size:12.5px;color:var(--text3);margin-top:5px}
+.brand{margin-bottom:36px;text-align:center}
+.brand .seal{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border:2px solid var(--accent);border-radius:50%;font-size:20px;font-weight:700;color:var(--accent);margin-bottom:16px;letter-spacing:1px;background:var(--accent-bg)}
+.brand h1{font-size:20px;font-weight:500;color:var(--text);letter-spacing:0.02em}
+.brand p{font-size:13px;color:var(--text3);margin-top:6px;font-weight:300}
 
 /* Card */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px 26px 22px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:28px 26px 24px}
 
 /* Tabs */
-.tabs{display:flex;margin-bottom:22px;border-bottom:1px solid var(--border);gap:0}
-.tabs button{flex:1;padding:0 0 10px;border:none;background:none;font-size:14px;font-weight:500;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:0.3px}
+.tabs{display:flex;margin-bottom:24px;border-bottom:1px solid var(--border-light)}
+.tabs button{flex:1;padding:0 0 10px;border:none;background:none;font-size:13.5px;font-weight:500;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:0.02em}
 .tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
 
 /* Forms */
 .form{display:none}
 .form.active{display:block}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11.5px;font-weight:500;color:var(--text2);margin-bottom:5px;letter-spacing:0.3px}
-.field input{width:100%;height:44px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;background:var(--surface2);color:var(--text);outline:none;transition:border-color .15s}
-.field input:focus{border-color:var(--accent-border)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:6px;letter-spacing:0.02em}
+.field label .req{color:var(--accent);margin-left:2px}
+.field input{width:100%;height:46px;padding:0 14px;border:1px solid var(--border-light);border-radius:var(--radius);font-size:14px;font-weight:400;background:var(--surface2);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;font-family:inherit}
+.field input:focus{border-color:var(--accent-border);box-shadow:0 0 0 3px rgba(161,98,7,0.1)}
 .field input::placeholder{color:var(--text3)}
+.field input:-webkit-autofill{-webkit-box-shadow:0 0 0 30px var(--surface2) inset!important;-webkit-text-fill-color:var(--text)!important}
 
 /* Buttons */
-.btn{width:100%;height:44px;background:var(--accent);color:#0a0e16;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:0.3px}
-.btn:hover{background:var(--accent2)}
-.btn:active{transform:scale(.98)}
+.btn{width:100%;height:46px;background:var(--accent);color:#FFFBEB;border:none;border-radius:var(--radius);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;letter-spacing:0.02em;font-family:inherit}
+.btn:hover{background:var(--accent-hover)}
+.btn:active{transform:scale(.985)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.btn-out{width:100%;height:38px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;cursor:pointer;margin-top:10px}
 
 /* Msg */
-.msg{display:none;font-size:12px;text-align:center;margin-top:10px;padding:8px;border-radius:6px}
-.msg.error{display:block;color:var(--error);background:rgba(224,85,85,0.08)}
-.msg.success{display:block;color:var(--success);background:rgba(65,168,120,0.08)}
+.msg{display:none;font-size:12.5px;text-align:center;margin-top:12px;padding:10px;border-radius:var(--radius);font-weight:400}
+.msg.error{display:block;color:var(--error);background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.15)}
+.msg.success{display:block;color:var(--success);background:var(--green-bg);border:1px solid rgba(74,222,128,0.15)}
 
-/* Links */
-.link-row{margin-top:16px;text-align:center;font-size:12.5px;color:var(--text3)}
+/* Link row */
+.link-row{margin-top:18px;text-align:center;font-size:13px;color:var(--text3)}
 .link-row a{color:var(--accent);text-decoration:none;cursor:pointer;font-weight:500}
-.link-row a:hover{opacity:.8}
-.forgot-link{display:block;text-align:right;font-size:11.5px;color:var(--text3);margin-top:-8px;margin-bottom:14px;cursor:pointer}
+.link-row a:hover{color:var(--accent-hover)}
+.forgot-link{display:block;text-align:right;font-size:12px;color:var(--text3);margin-top:-10px;margin-bottom:16px;cursor:pointer}
 .forgot-link:hover{color:var(--accent)}
 
 /* Quick login */
-.quick-login{margin-top:18px;display:none}
+.quick-login{margin-top:20px;display:none}
 .quick-login.show{display:block}
-.quick-login .ql-title{font-size:11px;color:var(--text3);text-align:center;margin-bottom:8px}
+.quick-login .ql-title{font-size:11.5px;color:var(--text3);text-align:center;margin-bottom:10px}
 .quick-login .ql-list{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.quick-login .ql-btn{padding:5px 14px;border:1px solid var(--border);border-radius:20px;background:var(--surface2);font-size:12px;cursor:pointer;color:var(--text2)}
+.quick-login .ql-btn{padding:6px 16px;border:1px solid var(--border-light);border-radius:20px;background:var(--surface2);font-size:12px;cursor:pointer;color:var(--text2);transition:all .2s}
 .quick-login .ql-btn:hover{border-color:var(--accent-border);color:var(--accent)}
 
 /* Stats */
-.stats{text-align:center;margin-top:24px;display:flex;justify-content:center;gap:28px}
+.stats{text-align:center;margin-top:28px;display:flex;justify-content:center;gap:32px}
 .stats .s{text-align:center}
-.stats .sn{font-size:18px;font-weight:600;color:var(--accent)}
-.stats .sl{font-size:11px;color:var(--text3);margin-top:2px}
+.stats .sn{font-size:18px;font-weight:500;color:var(--accent)}
+.stats .sl{font-size:11.5px;color:var(--text3);margin-top:3px;font-weight:300}
 
 /* Footer */
-.foot{text-align:center;margin-top:16px;font-size:11px;color:var(--text3);opacity:.6}
+.foot{text-align:center;margin-top:18px;font-size:11px;color:var(--text3);opacity:.5;font-weight:300}
 
 /* Modal */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99;align-items:center;justify-content:center;padding:20px}
+.modal{display:none;position:fixed;inset:0;background:rgba(12,10,9,.85);z-index:99;align-items:center;justify-content:center;padding:20px}
 .modal.show{display:flex}
-.modal .mc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 22px;width:100%;max-width:380px}
-.modal .mc h3{font-size:15px;margin-bottom:16px}
-.modal .mc .close-row{text-align:right;margin-top:14px}
+.modal .mc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:28px 24px;width:100%;max-width:380px}
+.modal .mc h3{font-size:16px;font-weight:500;margin-bottom:6px}
+.modal .mc .sub{font-size:12.5px;color:var(--text3);margin-bottom:18px;font-weight:300}
+.modal .mc .close-row{text-align:right;margin-top:16px}
 .modal .mc .close-row a{color:var(--text3);cursor:pointer;font-size:13px;text-decoration:none}
 .modal .mc .close-row a:hover{color:var(--accent)}
 
 @media(max-width:480px){
-  .card{padding:22px 18px 18px}
-  .brand{margin-bottom:24px}
-  .brand h1{font-size:17px}
-  .stats{gap:20px}
+  .card{padding:22px 18px 20px}
+  .brand{margin-bottom:28px}
+  .brand h1{font-size:18px}
+  .stats{gap:24px}
+  .stats .sn{font-size:16px}
 }
 </style>
 </head>
@@ -111,7 +119,7 @@ body::before{content:'';position:fixed;inset:0;background:
 <div class="page">
 
 <div class="brand">
-  <div class="mark">JL</div>
+  <div class="seal">JL</div>
   <h1>信息流广告营销师认证 · 题库</h1>
   <p>巨量引擎 · 数字营销效果信息流</p>
 </div>
@@ -123,8 +131,14 @@ body::before{content:'';position:fixed;inset:0;background:
   </div>
 
   <div class="form active" id="formLogin">
-    <div class="field"><label>用户名</label><input type="text" id="lu" placeholder="输入用户名" autocomplete="username"></div>
-    <div class="field"><label>密码</label><input type="password" id="lp" placeholder="输入密码" autocomplete="current-password"></div>
+    <div class="field">
+      <label>用户名</label>
+      <input type="text" id="lu" placeholder="输入用户名" autocomplete="username" inputmode="text">
+    </div>
+    <div class="field">
+      <label>密码</label>
+      <input type="password" id="lp" placeholder="输入密码" autocomplete="current-password">
+    </div>
     <a class="forgot-link" id="forgotLink">忘记密码？</a>
     <button class="btn" id="loginBtn" onclick="doLogin()">登 录</button>
     <div class="msg" id="loginMsg"></div>
@@ -138,9 +152,18 @@ body::before{content:'';position:fixed;inset:0;background:
   </div>
 
   <div class="form" id="formRegister">
-    <div class="field"><label>邀请码</label><input type="text" id="rc" placeholder="向管理员购买邀请码" autocomplete="off"></div>
-    <div class="field"><label>用户名</label><input type="text" id="ru" placeholder="设置用户名" autocomplete="off"></div>
-    <div class="field"><label>密码</label><input type="password" id="rp" placeholder="设置登录密码（至少4位）" autocomplete="new-password"></div>
+    <div class="field">
+      <label>邀请码 <span class="req">*</span></label>
+      <input type="text" id="rc" placeholder="向管理员购买邀请码" autocomplete="off" inputmode="text">
+    </div>
+    <div class="field">
+      <label>用户名 <span class="req">*</span></label>
+      <input type="text" id="ru" placeholder="设置用户名（2-20字符）" autocomplete="off" inputmode="text">
+    </div>
+    <div class="field">
+      <label>密码 <span class="req">*</span></label>
+      <input type="password" id="rp" placeholder="设置登录密码（至少4位）" autocomplete="new-password">
+    </div>
     <button class="btn" id="regBtn" onclick="doRegister()">注 册</button>
     <div class="msg" id="regMsg"></div>
 
@@ -149,10 +172,10 @@ body::before{content:'';position:fixed;inset:0;background:
 </div>
 
 <div class="stats">
-  <div class="s"><div class="sn">1494</div><div class="sl">真题</div></div>
+  <div class="s"><div class="sn">1,494</div><div class="sl">真题</div></div>
   <div class="s"><div class="sn">4</div><div class="sl">题库</div></div>
-  <div class="s"><div class="sn">32</div><div class="sl">课程</div></div>
-  <div class="s"><div class="sn">9</div><div class="sl">模块</div></div>
+  <div class="s"><div class="sn">32</div><div class="sl">节课程</div></div>
+  <div class="s"><div class="sn">9</div><div class="sl">大模块</div></div>
 </div>
 
 <div class="foot">认证考试辅导系统 · 2026</div>
@@ -163,10 +186,10 @@ body::before{content:'';position:fixed;inset:0;background:
 <div class="modal" id="resetModal">
   <div class="mc">
     <h3>重置密码</h3>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:14px">输入注册时使用的邀请码来验证身份</p>
-    <div class="field"><label>用户名</label><input type="text" id="rstUser" placeholder="输入你的用户名"></div>
-    <div class="field"><label>邀请码</label><input type="text" id="rstCode" placeholder="输入注册时使用的邀请码"></div>
-    <div class="field"><label>新密码</label><input type="password" id="rstPass" placeholder="设置新密码（至少4位）"></div>
+    <p class="sub">输入注册时使用的邀请码来验证身份</p>
+    <div class="field"><label>用户名 <span class="req">*</span></label><input type="text" id="rstUser" placeholder="输入你的用户名" autocomplete="username"></div>
+    <div class="field"><label>邀请码 <span class="req">*</span></label><input type="text" id="rstCode" placeholder="输入注册时使用的邀请码" autocomplete="off"></div>
+    <div class="field"><label>新密码 <span class="req">*</span></label><input type="password" id="rstPass" placeholder="设置新密码（至少4位）" autocomplete="new-password"></div>
     <button class="btn" onclick="doResetPassword()">重置密码</button>
     <div class="msg" id="resetMsg"></div>
     <div class="close-row"><a onclick="closeReset()">取消</a></div>
@@ -237,7 +260,6 @@ function switchTab(t){
   $('formRegister').className = isLogin ? 'form' : 'form active';
   hideMsg('loginMsg'); hideMsg('regMsg');
 }
-
 $('tabLogin').onclick = function(){ switchTab('login'); };
 $('tabRegister').onclick = function(){ switchTab('register'); };
 $('toRegister').onclick = function(){ switchTab('register'); };
@@ -289,13 +311,11 @@ $('forgotLink').onclick = function(){
   $('rstUser').value = $('lu').value.trim();
   hideMsg('resetMsg');
 };
-
 function closeReset(){
   $('resetModal').classList.remove('show');
   $('rstUser').value = ''; $('rstCode').value = ''; $('rstPass').value = '';
   hideMsg('resetMsg');
 }
-
 async function doResetPassword(){
   hideMsg('resetMsg');
   var u = $('rstUser').value.trim(), c = $('rstCode').value.trim(), p = $('rstPass').value.trim();
@@ -306,11 +326,8 @@ async function doResetPassword(){
     await apiFetch('/auth/reset-password',{method:'POST',body:{username:u,invite_code:c,new_password:p}});
     showMsg('resetMsg','密码重置成功！请返回登录','success');
     setTimeout(function(){ closeReset(); }, 2000);
-  }catch(e){
-    showMsg('resetMsg', e.message||'重置失败','error');
-  }
+  }catch(e){ showMsg('resetMsg', e.message||'重置失败','error'); }
 }
-
 $('resetModal').onclick = function(e){ if(e.target === this) closeReset(); };
 
 // Quick login
