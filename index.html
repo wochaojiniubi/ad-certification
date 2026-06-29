@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
@@ -9,96 +9,94 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0C0A09;
-  --surface: #1C1917;
-  --surface2: #292524;
-  --border: #44403C;
-  --border-light: #3D3835;
-  --text: #FAFAF9;
-  --text2: #A8A29E;
-  --text3: #78716C;
-  --accent: #A16207;
-  --accent-hover: #CA8A04;
-  --accent-bg: rgba(161,98,7,0.12);
-  --accent-border: rgba(161,98,7,0.3);
-  --green: #4ADE80;
-  --radius: 6px;
+  --bg: #F0FDFA;
+  --surface: #FFFFFF;
+  --surface2: #F8FAFC;
+  --border: #CCFBF1;
+  --border2: #E2E8F0;
+  --text: #134E4A;
+  --text2: #5E7F7C;
+  --text3: #94A3A8;
+  --pri: #0D9488;
+  --pri-hover: #0F766E;
+  --pri-bg: rgba(13,148,136,0.06);
+  --pri-border: rgba(13,148,136,0.2);
+  --accent: #D97706;
+  --green: #059669;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;font-weight:400;background:var(--bg);color:var(--text);min-height:100vh;padding:16px;line-height:1.6;letter-spacing:0.01em}
-body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse 50% 40% at 25% 30%,rgba(161,98,7,0.03) 0%,transparent 55%),
-  radial-gradient(ellipse 40% 50% at 75% 70%,rgba(161,98,7,0.02) 0%,transparent 55%);
-  pointer-events:none;z-index:0}
-.w{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.w{max-width:640px;margin:0 auto}
 
 /* Top bar */
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:10px}
-.topbar .brand{font-size:17px;font-weight:500;color:var(--text);letter-spacing:0.02em}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px}
+.topbar .brand{font-size:17px;font-weight:500;color:var(--pri)}
 .topbar .ua{display:flex;align-items:center;gap:8px}
-.topbar .utag{font-size:11.5px;color:var(--accent);background:var(--accent-bg);padding:4px 12px;border-radius:var(--radius);border:1px solid var(--accent-border)}
-.topbar .act-btn{font-size:11px;color:var(--text3);background:none;border:1px solid var(--border-light);border-radius:4px;padding:4px 10px;cursor:pointer;transition:all .2s;font-family:inherit;font-weight:400}
-.topbar .act-btn:hover{color:var(--text2);border-color:var(--text3)}
+.topbar .utag{font-size:12px;color:var(--text2);background:var(--surface2);padding:4px 12px;border-radius:6px;border:1px solid var(--border2)}
+.topbar .act-btn{font-size:11.5px;color:var(--text3);background:none;border:1px solid var(--border2);border-radius:6px;padding:4px 10px;cursor:pointer;transition:all .2s;font-family:inherit}
+.topbar .act-btn:hover{color:var(--pri);border-color:var(--pri-border)}
 
 /* Hero */
 .hero{text-align:center;margin:20px 0 28px}
 .hero h1{font-size:22px;font-weight:500;color:var(--text)}
 .hero p{font-size:13px;color:var(--text3);margin-top:6px;font-weight:300}
-.hero .hero-stats{display:flex;justify-content:center;gap:32px;margin-top:18px}
-.hero .hs{text-align:center}
-.hero .hs .hsn{font-size:20px;font-weight:500;color:var(--accent)}
-.hero .hs .hsl{font-size:11px;color:var(--text3);margin-top:3px;font-weight:300}
+.hero-stats{display:flex;justify-content:center;gap:32px;margin-top:18px}
+.hero-stats .hs{text-align:center}
+.hero-stats .hs .hsn{font-size:20px;font-weight:500;color:var(--pri)}
+.hero-stats .hs .hsl{font-size:11.5px;color:var(--text3);margin-top:2px;font-weight:300}
 
-/* Section title */
-.sec{font-size:13.5px;font-weight:500;color:var(--text2);margin:28px 0 12px;padding-left:12px;border-left:2px solid var(--accent-border)}
+/* Section */
+.sec{font-size:13.5px;font-weight:500;color:var(--text2);margin:24px 0 12px;padding-left:10px;border-left:2px solid var(--pri-border)}
 
-/* Quiz cards */
-.cards{display:flex;flex-direction:column;gap:8px}
-.card{background:var(--surface);border-radius:var(--radius);padding:16px 20px;border:1px solid var(--border-light);text-decoration:none;display:flex;justify-content:space-between;align-items:center;transition:all .2s}
-.card:hover{border-color:var(--accent-border)}
+/* Cards */
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--surface);border-radius:var(--radius);padding:16px 20px;border:1px solid var(--border2);text-decoration:none;display:flex;justify-content:space-between;align-items:center;transition:all .2s;box-shadow:var(--shadow)}
+.card:hover{border-color:var(--pri-border)}
 .card-info h3{font-size:14px;color:var(--text);margin-bottom:4px;font-weight:500}
-.card-info p{font-size:11px;color:var(--text3)}
+.card-info p{font-size:11.5px;color:var(--text3)}
 .card-meta{text-align:right;min-width:80px}
-.card-meta .total{font-size:26px;font-weight:500;color:var(--accent)}
+.card-meta .total{font-size:26px;font-weight:500;color:var(--pri)}
 .card-meta .total small{font-size:11px;display:block;color:var(--text3);font-weight:300}
 .card-meta .prog{font-size:11px;color:var(--green);margin-top:3px}
 
 /* Course tree */
-.ctree{background:var(--surface);border-radius:var(--radius);padding:16px 20px;border:1px solid var(--border-light)}
-.ctree .m{margin:8px 0;font-size:13px;line-height:1.6}
-.ctree .mn{font-weight:500;color:var(--accent);text-decoration:none}
-.ctree .mn:hover{color:var(--accent-hover)}
-.ctree .mi{font-size:11px;color:var(--text3);margin-left:16px;margin-top:2px;font-weight:300}
+.ctree{background:var(--surface);border-radius:var(--radius);padding:16px 20px;border:1px solid var(--border2);box-shadow:var(--shadow)}
+.ctree .m{margin:7px 0;font-size:13px;line-height:1.6}
+.ctree .mn{font-weight:500;color:var(--pri);text-decoration:none}
+.ctree .mn:hover{color:var(--pri-hover)}
+.ctree .mi{font-size:11px;color:var(--text3);margin-left:14px;margin-top:1px;font-weight:300}
 
 /* Hint */
-.hint{padding:14px;background:var(--accent-bg);border-radius:var(--radius);font-size:12px;text-align:center;color:var(--accent);border:1px solid var(--accent-border);margin-top:20px}
+.hint{padding:14px;background:var(--pri-bg);border-radius:var(--radius);font-size:12px;text-align:center;color:var(--pri);border:1px solid var(--pri-border);margin-top:20px}
 
 /* Footer */
-.footer{text-align:center;margin:32px 0 20px;font-size:11px;color:var(--text3);opacity:.5;font-weight:300}
+.footer{text-align:center;margin:32px 0 20px;font-size:11px;color:var(--text3);font-weight:300}
 
 /* Modal */
-.modal{display:none;position:fixed;inset:0;background:rgba(12,10,9,.85);z-index:99;align-items:center;justify-content:center;padding:20px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:99;align-items:center;justify-content:center;padding:20px}
 .modal.show{display:flex}
-.modal .mc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:28px 24px;width:100%;max-width:380px}
-.modal .mc h3{font-size:16px;font-weight:500;margin-bottom:6px}
-.modal .mc .sub{font-size:12.5px;color:var(--text3);margin-bottom:18px;font-weight:300}
+.modal .mc{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:28px 24px;width:100%;max-width:380px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.modal .mc h3{font-size:16px;font-weight:500;margin-bottom:4px;color:var(--text)}
+.modal .mc .sub{font-size:12.5px;color:var(--text3);margin-bottom:20px;font-weight:300}
 .modal .mc .field{margin-bottom:14px}
 .modal .mc .field label{display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:5px}
-.modal .mc .field input{width:100%;height:42px;padding:0 12px;border:1px solid var(--border-light);border-radius:var(--radius);background:var(--surface2);color:var(--text);outline:none;font-size:14px;font-family:inherit}
-.modal .mc .field input:focus{border-color:var(--accent-border);box-shadow:0 0 0 3px rgba(161,98,7,.1)}
-.modal .mc .btn{width:100%;height:42px;background:var(--accent);color:#FFFBEB;border:none;border-radius:var(--radius);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
-.modal .mc .btn:hover{background:var(--accent-hover)}
-.modal .mc .btn:disabled{opacity:.5}
+.modal .mc .field input{width:100%;height:42px;padding:0 12px;border:1.5px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-size:14px;font-family:inherit}
+.modal .mc .field input:focus{border-color:var(--pri-border);box-shadow:0 0 0 3px var(--pri-bg)}
+.modal .mc .btn{width:100%;height:42px;background:var(--pri);color:#FFF;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.modal .mc .btn:hover{background:var(--pri-hover)}
+.modal .mc .btn:disabled{opacity:.55}
 .modal .mc .close-row{text-align:right;margin-top:14px}
 .modal .mc .close-row a{color:var(--text3);cursor:pointer;font-size:13px}
-.modal .mc .close-row a:hover{color:var(--accent)}
-.msg{display:none;font-size:12px;text-align:center;margin-top:10px;padding:8px;border-radius:4px}
-.msg.error{display:block;color:#F87171;background:rgba(248,113,113,.08)}
-.msg.success{display:block;color:#4ADE80;background:rgba(74,222,128,.1)}
+.modal .mc .close-row a:hover{color:var(--pri)}
+.msg{display:none;font-size:12px;text-align:center;margin-top:10px;padding:8px;border-radius:6px}
+.msg.error{display:block;color:#DC2626;background:#FEF2F2;border:1px solid #FECACA}
+.msg.success{display:block;color:#059669;background:#ECFDF5;border:1px solid #A7F3D0}
 
 @media(max-width:480px){
   .hero h1{font-size:18px}
-  .hero .hero-stats{gap:20px}
+  .hero-stats{gap:20px}
   .card{padding:14px 16px}
 }
 </style>
@@ -210,8 +208,8 @@ function logout(){
   <div class="mc">
     <h3>修改密码</h3>
     <p class="sub">输入当前密码和新密码</p>
-    <div class="field"><label>当前密码</label><input type="password" id="pwdOld" placeholder="输入当前密码" autocomplete="current-password"></div>
-    <div class="field"><label>新密码</label><input type="password" id="pwdNew" placeholder="设置新密码（至少4位）" autocomplete="new-password"></div>
+    <div class="field"><label>当前密码</label><input type="password" id="pwdOld" placeholder="输入当前密码"></div>
+    <div class="field"><label>新密码</label><input type="password" id="pwdNew" placeholder="至少4位"></div>
     <button class="btn" id="pwdBtn" onclick="doChangePwd()">确认修改</button>
     <div class="msg" id="pwdMsg"></div>
     <div class="close-row"><a onclick="closePwdModal()">取消</a></div>
@@ -232,8 +230,7 @@ function renderCards(pm){
     var p = pm ? pm[q.id] : null;
     var ph = '';
     if(p && p.answered > 0){
-      var pct = Math.round(p.answered/q.total*100);
-      ph = '<div class="prog">已答 '+p.answered+' · 正确 '+p.correct+' · '+pct+'%</div>';
+      ph = '<div class="prog">已答 '+p.answered+' · 正确 '+p.correct+' · '+Math.round(p.answered/q.total*100)+'%</div>';
     }
     h += '<a class="card" href="'+q.file+'"><div class="card-info"><h3>'+q.title+'</h3><p>'+q.desc+'</p></div><div class="card-meta"><div class="total">'+q.total+'<small>题</small></div>'+ph+'</div></a>';
   });
@@ -245,12 +242,10 @@ function renderCards(pm){
   apiFetch('/quiz/progress').then(function(d){ renderCards(d); }).catch(function(){ renderCards(null); });
 })();
 
-// Change password
 function openPwdModal(){ document.getElementById('pwdModal').classList.add('show'); }
 function closePwdModal(){
   document.getElementById('pwdModal').classList.remove('show');
-  document.getElementById('pwdOld').value = '';
-  document.getElementById('pwdNew').value = '';
+  document.getElementById('pwdOld').value = ''; document.getElementById('pwdNew').value = '';
   document.getElementById('pwdMsg').className = 'msg';
 }
 function showPwdMsg(t,c){ var el = document.getElementById('pwdMsg'); el.textContent = t; el.className = 'msg '+c; }
