@@ -87,6 +87,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 
 <script>
 // ===== AUTH CHECK =====
+var API_BASE = 'http://<VPS_IP>/api';
+
 (function() {
   var session = localStorage.getItem('ad_quiz_session');
   if (!session) { location.href = 'login.html'; return; }
@@ -94,6 +96,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
     var data = JSON.parse(session);
     if (Date.now() > data.expires) {
       localStorage.removeItem('ad_quiz_session');
+      localStorage.removeItem('ad_quiz_token');
       location.href = 'login.html';
       return;
     }
@@ -101,8 +104,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
   } catch(e) { location.href = 'login.html'; }
 })();
 
+function getToken(){ return localStorage.getItem('ad_quiz_token'); }
+
+async function apiFetch(path, options){
+  options = options || {};
+  var headers = options.headers || {};
+  var token = getToken();
+  if(token) headers['Authorization'] = 'Bearer ' + token;
+  headers['Content-Type'] = headers['Content-Type'] || 'application/json';
+  var url = API_BASE + path;
+  var resp = await fetch(url, {
+    method: options.method || 'GET',
+    headers: headers,
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  if(resp.status === 401){
+    localStorage.removeItem('ad_quiz_session');
+    localStorage.removeItem('ad_quiz_token');
+    location.href = 'login.html';
+    throw new Error('Unauthorized');
+  }
+  var data = await resp.json();
+  if(!resp.ok) throw new Error(data.detail || 'API error');
+  return data;
+}
+
 function logout(){
   localStorage.removeItem('ad_quiz_session');
+  localStorage.removeItem('ad_quiz_token');
   location.href = 'login.html';
 }
 
@@ -115,21 +144,6 @@ function toggleTheme(){
   document.getElementById('themeBtn').textContent = next === 'dark' ? '☾' : '☀';
 }
 
-function getProgress(quizId){
-  var key = 'quiz_' + quizId + '_' + (window.__USER || '');
-  try {
-    var raw = localStorage.getItem(key);
-    if(!raw) return null;
-    var data = JSON.parse(raw);
-    var answered = Object.keys(data.answers||{}).length;
-    var correct = 0;
-    Object.keys(data.answers||{}).forEach(function(k){
-      if(data.answers[k].correct) correct++;
-    });
-    return { answered: answered, correct: correct };
-  } catch(e) { return null; }
-}
-
 // Init
 (function(){
   var theme = localStorage.getItem('ad_quiz_theme')||'light';
@@ -137,7 +151,6 @@ function getProgress(quizId){
   document.getElementById('themeBtn').textContent = theme === 'dark' ? '☾' : '☀';
   document.getElementById('userName').textContent = window.__USER || '';
 
-  // Render quiz cards with progress
   var quizzes = [
     { id: 'v1', title: '问卷星考试真题', desc: '388题 · 单选+判断', total: 388, file: 'quiz.html' },
     { id: 'v2', title: '官方真题库 PDF', desc: '224题 · 单选+多选+判断', total: 224, file: 'quiz_v2.html' },
@@ -145,21 +158,30 @@ function getProgress(quizId){
     { id: 'v4', title: '巨量认证速通指南', desc: '565题 · 最全面', total: 565, file: 'quiz_v4.html' }
   ];
 
-  var cardsHtml = '';
-  quizzes.forEach(function(q){
-    var prog = getProgress(q.id);
-    var progressHtml = '';
-    if(prog){
-      var pct = Math.round(prog.answered / q.total * 100);
-      progressHtml = '<div class="progress">已答 ' + prog.answered + ' · 正确 ' + prog.correct + ' · ' + pct + '%</div>';
-    }
-    cardsHtml +=
-      '<a class="card" href="' + q.file + '">' +
-      '<div class="card-info"><h3>' + q.title + '</h3><p>' + q.desc + '</p></div>' +
-      '<div class="card-meta"><div class="total">' + q.total + '<small>题</small></div>' + progressHtml + '</div>' +
-      '</a>';
+  function renderCards(progressMap){
+    var cardsHtml = '';
+    quizzes.forEach(function(q){
+      var prog = progressMap ? progressMap[q.id] : null;
+      var progressHtml = '';
+      if(prog && prog.answered > 0){
+        var pct = Math.round(prog.answered / q.total * 100);
+        progressHtml = '<div class="progress">已答 ' + prog.answered + ' · 正确 ' + prog.correct + ' · ' + pct + '%</div>';
+      }
+      cardsHtml +=
+        '<a class="card" href="' + q.file + '">' +
+        '<div class="card-info"><h3>' + q.title + '</h3><p>' + q.desc + '</p></div>' +
+        '<div class="card-meta"><div class="total">' + q.total + '<small>题</small></div>' + progressHtml + '</div>' +
+        '</a>';
+    });
+    document.getElementById('quizCards').innerHTML = cardsHtml;
+  }
+
+  // Try to load progress from server, fallback to empty
+  apiFetch('/quiz/progress').then(function(data){
+    renderCards(data);
+  }).catch(function(){
+    renderCards(null);
   });
-  document.getElementById('quizCards').innerHTML = cardsHtml;
 })();
 </script>
 
