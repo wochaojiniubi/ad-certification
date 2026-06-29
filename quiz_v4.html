@@ -174,7 +174,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 function logout(){
   localStorage.removeItem('ad_quiz_session');
+  localStorage.removeItem('ad_quiz_token');
   location.href = 'login.html';
+}
+
+// ===== API LAYER =====
+var API_BASE = 'http://<VPS_IP>/api';
+function getToken(){ return localStorage.getItem('ad_quiz_token'); }
+async function apiFetch(path, options){
+  options = options || {};
+  var headers = options.headers || {};
+  var token = getToken();
+  if(token) headers['Authorization'] = 'Bearer ' + token;
+  headers['Content-Type'] = headers['Content-Type'] || 'application/json';
+  var url = API_BASE + path;
+  try {
+    var resp = await fetch(url, {
+      method: options.method || 'GET',
+      headers: headers,
+      body: options.body ? JSON.stringify(options.body) : undefined
+    });
+    if(resp.status === 401){
+      localStorage.removeItem('ad_quiz_session');
+      localStorage.removeItem('ad_quiz_token');
+      location.href = 'login.html';
+      throw new Error('Unauthorized');
+    }
+    var data = await resp.json();
+    if(!resp.ok) throw new Error(data.detail || 'API error');
+    return data;
+  } catch(e){
+    if(e.message === 'Unauthorized') throw e;
+    throw e;
+  }
 }
 
 // ===== DATA =====
@@ -206,7 +238,7 @@ var STATE = {
   examHistory: []
 };
 
-// ===== PERSISTENCE =====
+// ===== PERSISTENCE (localStorage + server API) =====
 function loadState(){
   try{
     var raw = localStorage.getItem(STORE_KEY);
@@ -221,7 +253,17 @@ function loadState(){
     }
   }catch(e){}
 }
-function saveState(){
+function getStateData(){
+  return {
+    mode: STATE.mode,
+    answers: STATE.answers,
+    error_count: STATE.errorCount,
+    correct_count: STATE.correctCount,
+    cut_questions: STATE.cutQuestions,
+    exam_history: STATE.examHistory
+  };
+}
+function saveStateLocal(){
   try{
     localStorage.setItem(STORE_KEY, JSON.stringify({
       mode: STATE.mode,
@@ -233,11 +275,31 @@ function saveState(){
     }));
   }catch(e){}
 }
+function saveState(){
+  saveStateLocal();
+  apiFetch('/quiz/' + QUIZ_ID, { method: 'PUT', body: getStateData() }).catch(function(){});
+}
+async function syncFromServer(){
+  try {
+    var data = await apiFetch('/quiz/' + QUIZ_ID);
+    if(data && data.answers && Object.keys(data.answers).length > 0){
+      STATE.mode = data.mode || STATE.mode;
+      STATE.answers = data.answers || STATE.answers;
+      STATE.errorCount = data.error_count || STATE.errorCount;
+      STATE.correctCount = data.correct_count || STATE.correctCount;
+      STATE.cutQuestions = data.cut_questions || STATE.cutQuestions;
+      STATE.examHistory = data.exam_history || STATE.examHistory;
+      saveStateLocal();
+    }
+  } catch(e) {}
+}
 function clearState(){
   if(confirm('确定清空所有答题进度？包括错题记录和斩题。')){
     STATE.answers = {}; STATE.errorCount = {}; STATE.correctCount = {};
     STATE.cutQuestions = []; STATE.examHistory = [];
-    saveState(); renderAll();
+    saveStateLocal();
+    apiFetch('/quiz/' + QUIZ_ID, { method: 'DELETE' }).catch(function(){});
+    renderAll();
   }
 }
 
@@ -798,7 +860,7 @@ function exitExam(){
 })();
 document.getElementById('quizTitle').textContent = QUIZ_TITLE;
 loadState();
-renderAll();
+syncFromServer().then(function(){ renderAll(); });
 </script>
 </body>
 </html>
