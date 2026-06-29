@@ -1,107 +1,114 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>信息流广告营销师 · 题库系统</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
+<title>信息流广告营销师 · 题库</title>
 <style>
 :root {
-  --bg: #f0f2f5;
-  --card-bg: #ffffff;
-  --text: #1a1a2e;
-  --text-secondary: #64748b;
-  --border: #e2e8f0;
-  --accent: #7e22ce;
-  --accent-light: #a855f7;
-  --accent-bg: #faf5ff;
-  --shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --card-bg: #1e293b;
-  --text: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --border: #334155;
-  --accent-bg: #1e1b4b;
-  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --bg: #070a10;
+  --surface: #111927;
+  --surface2: #182233;
+  --border: #1e2a3c;
+  --text: #e2e6ec;
+  --text2: #8490a2;
+  --text3: #5c6678;
+  --accent: #c49b40;
+  --accent2: #d4af5a;
+  --accent-bg: rgba(196,155,64,0.08);
+  --accent-border: rgba(196,155,64,0.25);
+  --green: #41a878;
+  --radius: 8px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:16px;transition:background .3s,color .3s}
-
-.w{max-width:640px;margin:0 auto}
+body{font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:16px;line-height:1.5}
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse 60% 50% at 30% 20%,rgba(196,155,64,0.02) 0%,transparent 60%),
+  radial-gradient(ellipse 40% 60% at 70% 80%,rgba(196,155,64,0.02) 0%,transparent 60%);
+  pointer-events:none;z-index:0}
+.w{max-width:640px;margin:0 auto;position:relative;z-index:1}
 
 /* Header */
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px}
-.header .brand{font-size:18px;font-weight:700;color:var(--text)}
-.header .user-area{display:flex;align-items:center;gap:8px}
-.header .user-tag{font-size:12px;color:var(--accent);background:var(--accent-bg);padding:4px 12px;border-radius:20px}
-.header .logout-btn{font-size:11px;color:var(--text-secondary);background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;cursor:pointer}
-.header .theme-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--card-bg);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px}
+.topbar .brand{font-size:17px;font-weight:600;color:var(--text);letter-spacing:0.5px}
+.topbar .ua{display:flex;align-items:center;gap:8px}
+.topbar .utag{font-size:11px;color:var(--accent);background:var(--accent-bg);padding:4px 10px;border-radius:4px;border:1px solid var(--accent-border)}
+.topbar .act-btn{font-size:11px;color:var(--text3);background:none;border:1px solid var(--border);border-radius:4px;padding:3px 8px;cursor:pointer;transition:all .15s}
+.topbar .act-btn:hover{color:var(--text);border-color:var(--text3)}
 
 /* Hero */
 .hero{text-align:center;margin:20px 0 24px}
-.hero h1{font-size:22px;font-weight:700;color:var(--text)}
-.hero p{font-size:13px;color:var(--text-secondary);margin-top:6px}
-.hero .stats{display:flex;justify-content:center;gap:20px;margin-top:14px}
-.hero .stat{text-align:center}
-.hero .stat-num{font-size:20px;font-weight:700;color:var(--accent)}
-.hero .stat-label{font-size:11px;color:var(--text-secondary)}
+.hero h1{font-size:20px;font-weight:600;color:var(--text)}
+.hero p{font-size:13px;color:var(--text3);margin-top:6px}
+.hero .hero-stats{display:flex;justify-content:center;gap:24px;margin-top:14px}
+.hero .hs{text-align:center}
+.hero .hs .hsn{font-size:18px;font-weight:600;color:var(--accent)}
+.hero .hs .hsl{font-size:11px;color:var(--text3);margin-top:2px}
 
-/* Section */
-.section-title{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 12px;padding-left:10px;border-left:3px solid var(--accent)}
+/* Section title */
+.sec{font-size:14px;font-weight:600;color:var(--text2);margin:24px 0 10px;padding-left:10px;border-left:2px solid var(--accent-border)}
 
 /* Quiz cards */
-.cards{display:flex;flex-direction:column;gap:10px}
-.card{background:var(--card-bg);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);border:1px solid var(--border);text-decoration:none;color:var(--text);display:flex;justify-content:space-between;align-items:center;transition:all .15s}
-.card:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--accent)}
-.card:active{transform:scale(.99)}
-.card-info h3{font-size:14px;margin-bottom:3px}
-.card-info p{font-size:11px;color:var(--text-secondary)}
+.cards{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--surface);border-radius:var(--radius);padding:14px 18px;border:1px solid var(--border);text-decoration:none;display:flex;justify-content:space-between;align-items:center;transition:all .15s}
+.card:hover{border-color:var(--accent-border)}
+.card-info h3{font-size:14px;color:var(--text);margin-bottom:3px;font-weight:500}
+.card-info p{font-size:11px;color:var(--text3)}
 .card-meta{text-align:right;min-width:80px}
-.card-meta .total{font-size:26px;font-weight:700;color:var(--accent)}
-.card-meta .total small{font-size:11px;display:block;color:var(--text-secondary);font-weight:400}
-.card-meta .progress{font-size:11px;color:#22c55e;margin-top:2px}
+.card-meta .total{font-size:24px;font-weight:600;color:var(--accent)}
+.card-meta .total small{font-size:11px;display:block;color:var(--text3);font-weight:400}
+.card-meta .prog{font-size:11px;color:var(--green);margin-top:2px}
 
 /* Course tree */
-.course-tree{background:var(--card-bg);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);border:1px solid var(--border)}
-.course-tree .mod{margin:7px 0;font-size:13px;line-height:1.6}
-.course-tree .mod-name{font-weight:600;color:var(--accent);text-decoration:none}
-.course-tree .mod-name:hover{text-decoration:underline}
-.course-tree .mod-items{font-size:11px;color:var(--text-secondary);margin-left:14px;margin-top:1px}
+.ctree{background:var(--surface);border-radius:var(--radius);padding:14px 18px;border:1px solid var(--border)}
+.ctree .m{margin:7px 0;font-size:12.5px;line-height:1.6}
+.ctree .mn{font-weight:600;color:var(--accent);text-decoration:none}
+.ctree .mn:hover{opacity:.8}
+.ctree .mi{font-size:11px;color:var(--text3);margin-left:14px;margin-top:1px}
 
 /* Hint */
-.hint{max-width:640px;margin:20px auto;padding:12px;background:var(--accent-bg);border-radius:10px;font-size:12px;text-align:center;color:var(--accent);border:1px solid rgba(126,34,206,0.15)}
+.hint{padding:12px;background:var(--accent-bg);border-radius:var(--radius);font-size:12px;text-align:center;color:var(--accent);border:1px solid var(--accent-border);margin-top:16px}
 
 /* Footer */
-.footer{text-align:center;margin:30px 0 20px;color:var(--text-secondary);font-size:11px;opacity:0.7}
+.footer{text-align:center;margin:28px 0 20px;font-size:11px;color:var(--text3);opacity:.6}
 
-@media (max-width:480px){
-  .hero h1{font-size:18px}
-  .hero .stat-num{font-size:16px}
+/* Modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal .mc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 22px;width:100%;max-width:380px}
+.modal .mc h3{font-size:15px;margin-bottom:16px}
+.modal .mc .field{margin-bottom:12px}
+.modal .mc .field label{display:block;font-size:11px;font-weight:500;color:var(--text2);margin-bottom:4px}
+.modal .mc .field input{width:100%;height:40px;padding:0 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);outline:none;font-size:14px}
+.modal .mc .field input:focus{border-color:var(--accent-border)}
+.modal .mc .btn{width:100%;height:40px;background:var(--accent);color:#0a0e16;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px}
+.modal .mc .btn:disabled{opacity:.5}
+.modal .mc .close-row{text-align:right;margin-top:10px}
+.modal .mc .close-row a{color:var(--text3);cursor:pointer;font-size:13px;text-decoration:none}
+.modal .mc .close-row a:hover{color:var(--accent)}
+.msg{display:none;font-size:12px;text-align:center;margin-top:8px;padding:6px;border-radius:4px}
+.msg.error{display:block;color:#e05555;background:rgba(224,85,85,0.08)}
+.msg.success{display:block;color:#41a878;background:rgba(65,168,120,0.08)}
+
+@media(max-width:480px){
+  .hero h1{font-size:17px}
+  .hero .hero-stats{gap:16px}
   .card{padding:12px 14px}
-  .card-meta .total{font-size:22px}
 }
 </style>
 </head>
 <body>
-
 <script>
-// ===== AUTH CHECK =====
 var API_BASE = 'http://175.178.204.24/api';
 
-(function() {
-  var session = localStorage.getItem('ad_quiz_session');
-  if (!session) { location.href = 'login.html'; return; }
-  try {
-    var data = JSON.parse(session);
-    if (Date.now() > data.expires) {
-      localStorage.removeItem('ad_quiz_session');
-      localStorage.removeItem('ad_quiz_token');
-      location.href = 'login.html';
-      return;
-    }
-    window.__USER = data.user;
-  } catch(e) { location.href = 'login.html'; }
+(function(){
+  var s = localStorage.getItem('ad_quiz_session');
+  if(!s){ location.href = 'login.html'; return; }
+  try{
+    var d = JSON.parse(s);
+    if(Date.now() > d.expires){ localStorage.removeItem('ad_quiz_session'); localStorage.removeItem('ad_quiz_token'); location.href = 'login.html'; return; }
+    window.__USER = d.user;
+  }catch(e){ location.href = 'login.html'; }
 })();
 
 function getToken(){ return localStorage.getItem('ad_quiz_token'); }
@@ -112,141 +119,156 @@ async function apiFetch(path, options){
   var token = getToken();
   if(token) headers['Authorization'] = 'Bearer ' + token;
   headers['Content-Type'] = headers['Content-Type'] || 'application/json';
-  var url = API_BASE + path;
-  var resp = await fetch(url, {
+  var resp = await fetch(API_BASE + path, {
     method: options.method || 'GET',
     headers: headers,
     body: options.body ? JSON.stringify(options.body) : undefined
   });
   if(resp.status === 401){
-    localStorage.removeItem('ad_quiz_session');
-    localStorage.removeItem('ad_quiz_token');
-    location.href = 'login.html';
-    throw new Error('Unauthorized');
+    localStorage.removeItem('ad_quiz_session'); localStorage.removeItem('ad_quiz_token');
+    location.href = 'login.html'; throw new Error('Unauthorized');
   }
   var data = await resp.json();
-  if(!resp.ok) throw new Error(data.detail || 'API error');
+  if(!resp.ok) throw new Error(data.detail || 'Error');
   return data;
 }
 
 function logout(){
-  localStorage.removeItem('ad_quiz_session');
-  localStorage.removeItem('ad_quiz_token');
+  localStorage.removeItem('ad_quiz_session'); localStorage.removeItem('ad_quiz_token');
   location.href = 'login.html';
 }
-
-function toggleTheme(){
-  var el = document.documentElement;
-  var cur = el.getAttribute('data-theme')||'light';
-  var next = cur === 'dark' ? 'light' : 'dark';
-  el.setAttribute('data-theme', next);
-  localStorage.setItem('ad_quiz_theme', next);
-  document.getElementById('themeBtn').textContent = next === 'dark' ? '☾' : '☀';
-}
-
-// Init
-(function(){
-  var theme = localStorage.getItem('ad_quiz_theme')||'light';
-  document.documentElement.setAttribute('data-theme', theme);
-  document.getElementById('themeBtn').textContent = theme === 'dark' ? '☾' : '☀';
-  document.getElementById('userName').textContent = window.__USER || '';
-
-  var quizzes = [
-    { id: 'v1', title: '问卷星考试真题', desc: '388题 · 单选+判断', total: 388, file: 'quiz.html' },
-    { id: 'v2', title: '官方真题库 PDF', desc: '224题 · 单选+多选+判断', total: 224, file: 'quiz_v2.html' },
-    { id: 'v3', title: '认证理论试题库', desc: '317题 · 含解析', total: 317, file: 'quiz_v3.html' },
-    { id: 'v4', title: '巨量认证速通指南', desc: '565题 · 最全面', total: 565, file: 'quiz_v4.html' }
-  ];
-
-  function renderCards(progressMap){
-    var cardsHtml = '';
-    quizzes.forEach(function(q){
-      var prog = progressMap ? progressMap[q.id] : null;
-      var progressHtml = '';
-      if(prog && prog.answered > 0){
-        var pct = Math.round(prog.answered / q.total * 100);
-        progressHtml = '<div class="progress">已答 ' + prog.answered + ' · 正确 ' + prog.correct + ' · ' + pct + '%</div>';
-      }
-      cardsHtml +=
-        '<a class="card" href="' + q.file + '">' +
-        '<div class="card-info"><h3>' + q.title + '</h3><p>' + q.desc + '</p></div>' +
-        '<div class="card-meta"><div class="total">' + q.total + '<small>题</small></div>' + progressHtml + '</div>' +
-        '</a>';
-    });
-    document.getElementById('quizCards').innerHTML = cardsHtml;
-  }
-
-  // Try to load progress from server, fallback to empty
-  apiFetch('/quiz/progress').then(function(data){
-    renderCards(data);
-  }).catch(function(){
-    renderCards(null);
-  });
-})();
 </script>
 
 <div class="w">
 
-<div class="header">
-  <div class="brand">▣ 信息流广告营销师</div>
-  <div class="user-area">
-    <span class="user-tag" id="userName"></span>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀</button>
-    <button class="logout-btn" onclick="logout()">退出</button>
+<div class="topbar">
+  <div class="brand">JL · 信息流广告营销师</div>
+  <div class="ua">
+    <span class="utag" id="userName"></span>
+    <button class="act-btn" onclick="openPwdModal()">改密</button>
+    <button class="act-btn" onclick="logout()">退出</button>
   </div>
 </div>
 
 <div class="hero">
   <h1>巨量引擎 · 数字营销效果信息流认证</h1>
-  <p>系统化刷题平台 · 同步巨量学课程大纲</p>
-  <div class="stats">
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">题库</div></div>
-    <div class="stat"><div class="stat-num">1,494</div><div class="stat-label">真题</div></div>
-    <div class="stat"><div class="stat-num">32</div><div class="stat-label">节课程</div></div>
-    <div class="stat"><div class="stat-num">9</div><div class="stat-label">大模块</div></div>
+  <p>系统化刷题 · 真题覆盖 · 课程同步</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hsn">1494</div><div class="hsl">真题</div></div>
+    <div class="hs"><div class="hsn">4</div><div class="hsl">题库</div></div>
+    <div class="hs"><div class="hsn">32</div><div class="hsl">课程</div></div>
+    <div class="hs"><div class="hsn">9</div><div class="hsl">模块</div></div>
   </div>
 </div>
 
-<div class="section-title">题库列表</div>
+<div class="sec">题库列表</div>
 <div class="cards" id="quizCards"></div>
 
-<div class="section-title">巨量学课程体系（32节课 · 7小时）</div>
-<div class="course-tree">
-<div class="mod"><a class="mod-name" href="courses.html#m01">01 行业与平台基础</a> <span style="font-size:10px;color:var(--text-secondary)">~1.2h</span>
-  <div class="mod-items">信息流广告行业洞察 → 平台概览 → 工作台介绍 → 效果广告原理 → 流量产品与创意样式</div>
+<div class="sec">巨量学课程体系（32 节 · 7 小时）</div>
+<div class="ctree">
+<div class="m"><a class="mn" href="courses.html#m01">01 行业与平台基础</a> <span style="font-size:10px;color:var(--text3)">~1.2h</span>
+  <div class="mi">信息流广告行业洞察 → 平台概览 → 工作台介绍 → 效果广告原理 → 流量产品与创意样式</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m02">02 投放工具与产品</a> <span style="font-size:10px;color:var(--text-secondary)">~1.1h</span>
-  <div class="mod-items">效果工具概念/概览 → 科学流量选择（定向） → 自动化投放 → UBX平台</div>
+<div class="m"><a class="mn" href="courses.html#m02">02 投放工具与产品</a> <span style="font-size:10px;color:var(--text3)">~1.1h</span>
+  <div class="mi">效果工具概念/概览 → 科学流量选择（定向） → 自动化投放 → UBX平台</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m03">03 账户搭建与创意</a> <span style="font-size:10px;color:var(--text-secondary)">~1.3h</span>
-  <div class="mod-items">多账户管理 → 主创编流程 → 账户搭建技巧 → 创意策划撰写 → 落地页设计</div>
+<div class="m"><a class="mn" href="courses.html#m03">03 账户搭建与创意</a> <span style="font-size:10px;color:var(--text3)">~1.3h</span>
+  <div class="mi">多账户管理 → 主创编流程 → 账户搭建技巧 → 创意策划撰写 → 落地页设计</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m04">04 深度转化与线索</a> <span style="font-size:10px;color:var(--text-secondary)">~0.7h</span>
-  <div class="mod-items">深度转化线索入门 → 线索避坑/优秀案例 → 穿山甲广告资源与优化</div>
+<div class="m"><a class="mn" href="courses.html#m04">04 深度转化与线索</a> <span style="font-size:10px;color:var(--text3)">~0.7h</span>
+  <div class="mi">深度转化线索入门 → 线索避坑/优秀案例 → 穿山甲广告资源与优化</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m05">05 客户营销与提案</a> <span style="font-size:10px;color:var(--text-secondary)">~0.6h</span>
-  <div class="mod-items">客户营销目标洞察 → 高效提案策划与呈现</div>
+<div class="m"><a class="mn" href="courses.html#m05">05 客户营销与提案</a> <span style="font-size:10px;color:var(--text3)">~0.6h</span>
+  <div class="mi">客户营销目标洞察 → 高效提案策划与呈现</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m06">06 合规与审核</a> <span style="font-size:10px;color:var(--text-secondary)">~1.3h</span>
-  <div class="mod-items">互联网广告风险意识 → 审核通用规则 → 巨量引擎广告规范</div>
+<div class="m"><a class="mn" href="courses.html#m06">06 合规与审核</a> <span style="font-size:10px;color:var(--text3)">~1.3h</span>
+  <div class="mi">互联网广告风险意识 → 审核通用规则 → 巨量引擎广告规范</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m07">07 数据分析</a> <span style="font-size:10px;color:var(--text-secondary)">~0.3h</span>
-  <div class="mod-items">投放数据指标洞察解析</div>
+<div class="m"><a class="mn" href="courses.html#m07">07 数据分析</a> <span style="font-size:10px;color:var(--text3)">~0.3h</span>
+  <div class="mi">投放数据指标洞察解析</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m08">08 职业素养</a> <span style="font-size:10px;color:var(--text-secondary)">~1.2h</span>
-  <div class="mod-items">职业发展规划 → 时间管理 → 沟通技巧 → Excel实用技能</div>
+<div class="m"><a class="mn" href="courses.html#m08">08 职业素养</a> <span style="font-size:10px;color:var(--text3)">~1.2h</span>
+  <div class="mi">职业发展规划 → 时间管理 → 沟通技巧 → Excel实用技能</div>
 </div>
-<div class="mod"><a class="mod-name" href="courses.html#m09">09 考试与结业</a> <span style="font-size:10px;color:var(--text-secondary)">~0.1h</span>
-  <div class="mod-items">系列课程介绍 / 认证考试指引</div>
+<div class="m"><a class="mn" href="courses.html#m09">09 考试与结业</a> <span style="font-size:10px;color:var(--text3)">~0.1h</span>
+  <div class="mi">系列课程介绍 / 认证考试指引</div>
 </div>
-</div>
-
-<div class="hint">
-  答错题自动显示对应巨量学课程模块，方便回顾知识点。答题进度自动保存。
 </div>
 
-<div class="footer">巨量学 · 数字营销效果信息流认证考试辅导 · 2026</div>
-
+<div class="hint">答错题自动显示对应课程模块 · 答题进度云端保存 · 换设备登录进度不丢失</div>
+<div class="footer">认证考试辅导系统 · 2026</div>
 </div>
+
+<!-- Change Password Modal -->
+<div class="modal" id="pwdModal">
+  <div class="mc">
+    <h3>修改密码</h3>
+    <div class="field"><label>当前密码</label><input type="password" id="pwdOld" placeholder="输入当前密码"></div>
+    <div class="field"><label>新密码</label><input type="password" id="pwdNew" placeholder="设置新密码（至少4位）"></div>
+    <button class="btn" id="pwdBtn" onclick="doChangePwd()">确认修改</button>
+    <div class="msg" id="pwdMsg"></div>
+    <div class="close-row"><a onclick="closePwdModal()">取消</a></div>
+  </div>
+</div>
+
+<script>
+var quizzes = [
+  {id:'v1',title:'问卷星考试真题',desc:'388题 · 单选+判断',total:388,file:'quiz.html'},
+  {id:'v2',title:'官方真题库 PDF',desc:'224题 · 单选+多选+判断',total:224,file:'quiz_v2.html'},
+  {id:'v3',title:'认证理论试题库',desc:'317题 · 含解析',total:317,file:'quiz_v3.html'},
+  {id:'v4',title:'巨量认证速通指南',desc:'565题 · 最全面',total:565,file:'quiz_v4.html'}
+];
+
+function renderCards(pm){
+  var h = '';
+  quizzes.forEach(function(q){
+    var p = pm ? pm[q.id] : null;
+    var ph = '';
+    if(p && p.answered > 0){
+      var pct = Math.round(p.answered/q.total*100);
+      ph = '<div class="prog">已答 '+p.answered+' · 正确 '+p.correct+' · '+pct+'%</div>';
+    }
+    h += '<a class="card" href="'+q.file+'"><div class="card-info"><h3>'+q.title+'</h3><p>'+q.desc+'</p></div><div class="card-meta"><div class="total">'+q.total+'<small>题</small></div>'+ph+'</div></a>';
+  });
+  document.getElementById('quizCards').innerHTML = h;
+}
+
+// Init
+(function(){
+  document.getElementById('userName').textContent = window.__USER || '';
+  apiFetch('/quiz/progress').then(function(d){ renderCards(d); }).catch(function(){ renderCards(null); });
+})();
+
+// Change password
+function openPwdModal(){ document.getElementById('pwdModal').classList.add('show'); }
+function closePwdModal(){
+  document.getElementById('pwdModal').classList.remove('show');
+  document.getElementById('pwdOld').value = '';
+  document.getElementById('pwdNew').value = '';
+  document.getElementById('pwdMsg').className = 'msg';
+}
+function showPwdMsg(t,c){ var el = document.getElementById('pwdMsg'); el.textContent = t; el.className = 'msg '+c; }
+
+async function doChangePwd(){
+  showPwdMsg('','');
+  var old = document.getElementById('pwdOld').value.trim();
+  var neu = document.getElementById('pwdNew').value.trim();
+  if(!old){ showPwdMsg('请输入当前密码','error'); return; }
+  if(!neu || neu.length<4){ showPwdMsg('新密码至少4位','error'); return; }
+  var btn = document.getElementById('pwdBtn');
+  btn.disabled = true; btn.textContent = '修改中…';
+  try{
+    await apiFetch('/auth/password',{method:'PUT',body:{old_password:old,new_password:neu}});
+    showPwdMsg('密码修改成功','success');
+    setTimeout(closePwdModal, 1500);
+  }catch(e){
+    showPwdMsg(e.message === 'Current password is incorrect' ? '当前密码错误' : (e.message||'修改失败'),'error');
+    btn.disabled = false; btn.textContent = '确认修改';
+  }
+}
+
+// Close modal on backdrop click
+document.getElementById('pwdModal').onclick = function(e){ if(e.target === this) closePwdModal(); };
+</script>
 </body>
 </html>
